@@ -718,9 +718,9 @@ bool QMarkdownTextEdit::handleBracketClosing(const QChar openingCharacter,
 
     const int pib = cursor.positionInBlock();
     bool isPreviousAsterisk = pib > 0 && pib < text.length() && text.at(pib - 1) == '*';
-    bool isNextAsterisk = pib < text.length() && text.at(pib) == '*';
+    bool isNextAsterisk = pib >0 && pib < text.length() && text.at(pib) == '*';
     bool isMaybeBold = isPreviousAsterisk && isNextAsterisk;
-    if (pib < text.length() && !isMaybeBold && !text.at(pib).isSpace()) {
+    if (pib > 0 && pib < text.length() && !isMaybeBold && !text.at(pib).isSpace()) {
         return false;
     }
 

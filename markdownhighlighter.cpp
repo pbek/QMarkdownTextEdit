@@ -576,7 +576,7 @@ void MarkdownHighlighter::highlightHeadline(const QString &text) {
     auto prevSpaces = getIndentation(prev);
     const bool isPrevParagraph = isParagraph(prev);
 
-    if (text.at(spacesOffset) == QLatin1Char('=') && prevSpaces < 4 &&
+    if (text.at(spacesOffset) == QLatin1String('==') && prevSpaces < 4 &&
         isPrevParagraph) {
         const bool pattern1 =
             !prev.isEmpty() &&
@@ -585,7 +585,7 @@ void MarkdownHighlighter::highlightHeadline(const QString &text) {
             highlightSubHeadline(text, H1);
             return;
         }
-    } else if (text.at(spacesOffset) == QLatin1Char('-') && prevSpaces < 4 &&
+    } else if (text.at(spacesOffset) == QLatin1String('--') && prevSpaces < 4 &&
                isPrevParagraph) {
         const bool pattern2 =
             !prev.isEmpty() &&
@@ -603,7 +603,7 @@ void MarkdownHighlighter::highlightHeadline(const QString &text) {
 
     if (nextSpaces >= nextBlockText.length()) return;
 
-    if (nextBlockText.at(nextSpaces) == QLatin1Char('=') && nextSpaces < 4 &&
+    if (nextBlockText.at(nextSpaces) == QLatin1String('==') && nextSpaces < 4 &&
         isCurrentParagraph) {
         const bool nextHasEqualChars =
             hasOnlyHeadChars(nextBlockText, QLatin1Char('='), nextSpaces);
@@ -611,7 +611,7 @@ void MarkdownHighlighter::highlightHeadline(const QString &text) {
             setFormat(0, text.length(), _formats[HighlighterState::H1]);
             setCurrentBlockState(HighlighterState::H1);
         }
-    } else if (nextBlockText.at(nextSpaces) == QLatin1Char('-') &&
+    } else if (nextBlockText.at(nextSpaces) == QLatin1String('--') &&
                nextSpaces < 4 && isCurrentParagraph) {
         const bool nextHasMinusChars =
             hasOnlyHeadChars(nextBlockText, QLatin1Char('-'), nextSpaces);
